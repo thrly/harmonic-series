@@ -107,7 +107,7 @@ function draw() {
   text("freq: " + freq + " Hz", width-280, 25);
   text("wander: " + wanderSpeed.value(), width-280, 50);
   // text("F = fullscreen\nR = randomise", width-100, height-35);
-  text("R = randomise", width-100, height-35);
+  text("~ o thurley, 2024", width-120, height-35);
 
   pop();
 }
