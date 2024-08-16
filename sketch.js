@@ -1,4 +1,4 @@
-let osc1, osc2, osc3, playing, freq, amp, delay, reverb;
+let osc1, osc2, osc3, playing, freq, amp, delay, reverb, inc, a;
 let fundamentalSlider, slider, startButton, randomButton, resetButton, fullscreenButton, saveCSVbutton, wanderButton, wanderSpeed;
 
 let oscCount = 21;
@@ -8,6 +8,7 @@ let allAmps = [];
 let audioToggle = 0;
 let fullscreenToggle = 0;
 let wanderToggle = 0;
+
 
 function setup() {
   getAudioContext().suspend();
@@ -54,7 +55,7 @@ function setup() {
   wanderButton.mousePressed(wander);
   
   saveCSVbutton = createButton("save CSV");
-  saveCSVbutton.position(width-100, height-80);
+  saveCSVbutton.position(width-(width*0.1), height-80);
   saveCSVbutton.mousePressed(dumpout);
   
 
@@ -70,7 +71,14 @@ function draw() {
   wanderSpeed.position(width-180, 35);
   wanderSpeed.size(150);
   
+  let vOffset = height/(oscCount+1);
+  
+  
+  
+  
   for (let i = 0; i < oscCount; i++) {
+    let inc = (TWO_PI/25)/(width/100);
+    let a = 0.0;
     allOscs[i].freq(freq * i);
     allOscs[i].amp(allAmps[i].value());
     noStroke();
@@ -86,12 +94,17 @@ function draw() {
     // draw lines and circles
     stroke(255 - gradient, 0, 255, 50);
     line(210, drawY, width, drawY);
-    for (let x = 220; x < width; x += 25) {
+    for (let x = 220; x < width; x += 2) {
+
+      let sineY = drawY + (sin(a*i)*8);
+      // let sineY = (vOffset*i) + sineVal * (vOffset*0.99);
+      
       push();
       noStroke();
       fill(255 - gradient, 0, 255, 127 * allAmps[i].value());
-      ellipse(x, drawY, 30 * allAmps[i].value(), 30 * allAmps[i].value());
+      ellipse(x, sineY, 4 * allAmps[i].value(), 4 * allAmps[i].value());
       pop();
+      a+=inc;
     }
   }
   
@@ -107,7 +120,7 @@ function draw() {
   text("freq: " + freq + " Hz", width-280, 25);
   text("wander: " + wanderSpeed.value(), width-280, 50);
   // text("F = fullscreen\nR = randomise", width-100, height-35);
-  text("~ o thurley, 2024", width-120, height-35);
+  text("~ o thurley, 2024", width-100, height-35);
 
   pop();
 }
