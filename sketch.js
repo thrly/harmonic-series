@@ -77,7 +77,7 @@ function draw() {
   
   
   for (let i = 0; i < oscCount; i++) {
-    let inc = (TWO_PI/25)/(width/100);
+    let inc = (TWO_PI/25)/(width/170);
     let a = 0.0;
     allOscs[i].freq(freq * i);
     allOscs[i].amp(allAmps[i].value());
@@ -94,15 +94,16 @@ function draw() {
     // draw lines and circles
     stroke(255 - gradient, 0, 255, 50);
     line(210, drawY, width, drawY);
-    for (let x = 220; x < width; x += 2) {
+    for (let x = 210; x < width; x += 2) {
 
       let sineY = drawY + (sin(a*i)*8);
       // let sineY = (vOffset*i) + sineVal * (vOffset*0.99);
       
       push();
       noStroke();
-      fill(255 - gradient, 0, 255, 127 * allAmps[i].value());
-      ellipse(x, sineY, 4 * allAmps[i].value(), 4 * allAmps[i].value());
+      fill(255 - gradient, 0, 255, 40 + (127 * allAmps[i].value()));
+      let waveSize = map(allAmps[i].value(),0,1,1,3)
+      ellipse(x, sineY, waveSize, waveSize);
       pop();
       a+=inc;
     }
