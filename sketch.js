@@ -19,7 +19,7 @@ function setup() {
     
     let slider = createSlider(0, 0.95, 0.8 - 1 * (i * 0.06), 0.01);
     slider.position(10, windowHeight - (vSpace * i));
-    slider.size(width*0.2);
+    slider.size(190);
     allAmps.push(slider)
     
     osc.setType("sine");
@@ -131,6 +131,7 @@ function keyPressed() {
     for(let r = 0; r < oscCount;r++){
       allAmps[r].value(random(0,1));
     }
+    wanderToggle = 0;
   }
 }
 
@@ -150,6 +151,8 @@ function randomise(){
   for(let r = 0; r < oscCount;r++){
       allAmps[r].value(random(0,0.9));
     }
+  wanderToggle = 0;
+  wanderButton.html('wander');
 }
 function reset(){
   for(let r = 0; r < oscCount;r++){
