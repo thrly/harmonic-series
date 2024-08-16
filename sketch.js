@@ -17,7 +17,7 @@ function setup() {
   for (let i = 0; i < oscCount; i++) {
     let osc = new p5.Oscillator();
     
-    let slider = createSlider(0, 0.95, 0.8 - 1 * (i * 0.06), 0.01);
+    let slider = createSlider(0, 0.95, 0.8 - 1 * (i * 0.06), 0.01); 
     slider.position(10, windowHeight - (vSpace * i));
     slider.size(190);
     allAmps.push(slider)
@@ -63,10 +63,10 @@ function draw() {
   freq = fundamentalSlider.value();
   noStroke();
   
-  fundamentalSlider.position(width-220, 10);
-  fundamentalSlider.size(200);
-  wanderSpeed.position(width-220, 35);
-  wanderSpeed.size(200);
+  fundamentalSlider.position(width-180, 10);
+  fundamentalSlider.size(150);
+  wanderSpeed.position(width-180, 35);
+  wanderSpeed.size(150);
   
   for (let i = 0; i < oscCount; i++) {
     allOscs[i].freq(freq * i);
@@ -102,8 +102,8 @@ function draw() {
       text("f"+i+": "+freq * i+" Hz", 210, drawY-10);
 
     }
-  text("freq: " + freq + " Hz", width-300, 25);
-  text("wander: " + wanderSpeed.value(), width-300, 50);
+  text("freq: " + freq + " Hz", width-280, 25);
+  text("wander: " + wanderSpeed.value(), width-280, 50);
   text("F = fullscreen\nR = randomise", width-100, height-35);
   pop();
 }
