@@ -16,9 +16,11 @@ function setup() {
 
   for (let i = 0; i < oscCount; i++) {
     let osc = new p5.Oscillator();
-    
+
     let slider = createSlider(0, 0.95, 0.8 - 1 * (i * 0.06), 0.01); 
-    slider.position(10, windowHeight - (vSpace * i));
+    //slider.position(10, windowHeight - (height/oscCount * i));
+    slider.position(10, windowHeight -(windowHeight/(oscCount-0.2) * i));
+
     slider.size(190);
     allAmps.push(slider)
     
@@ -43,12 +45,12 @@ function setup() {
   resetButton.position(width-(width*0.1), 125);
   resetButton.mousePressed(reset);
   
-  fullscreenButton = createButton("fullscreen");
-  fullscreenButton.position(width-(width*0.1), 155);
-  fullscreenButton.mousePressed(fullscreenMode);
+  // fullscreenButton = createButton("fullscreen");
+  // fullscreenButton.position(width-(width*0.1), 155);
+  // fullscreenButton.mousePressed(fullscreenMode);
   
   wanderButton = createButton("wander");
-  wanderButton.position(width-(width*0.1), 185);
+  wanderButton.position(width-(width*0.1), 155);
   wanderButton.mousePressed(wander);
   
   saveCSVbutton = createButton("save CSV");
@@ -104,28 +106,30 @@ function draw() {
     }
   text("freq: " + freq + " Hz", width-280, 25);
   text("wander: " + wanderSpeed.value(), width-280, 50);
-  text("F = fullscreen\nR = randomise", width-100, height-35);
+  // text("F = fullscreen\nR = randomise", width-100, height-35);
+  text("R = randomise", width-100, height-35);
+
   pop();
 }
 
 // Resize the canvas when the browser's size changes.
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+// function windowResized() {
+//   resizeCanvas(windowWidth, windowHeight);
   
-  startButton.position(width-(width*0.1), 65);
-  randomButton.position(width-(width*0.1), 95);
-  resetButton.position(width-(width*0.1), 125);
-  fullscreenButton.position(width-(width*0.1), 155);
-  wanderButton.position(width-(width*0.1), 185);
-  saveCSVbutton.position(width-(width*0.1), height-80);
-}
+//   startButton.position(width-(width*0.1), 65);
+//   randomButton.position(width-(width*0.1), 95);
+//   resetButton.position(width-(width*0.1), 125);
+//   // fullscreenButton.position(width-(width*0.1), 155);
+//   wanderButton.position(width-(width*0.1), 185);
+//   saveCSVbutton.position(width-(width*0.1), height-80);
+// }
 
 // If the mouse is pressed toggle full-screen mode.
 function keyPressed() {
-  if (key === 'f') {
-    let fs = fullscreen();
-    fullscreen(!fs);
-  }
+  // if (key === 'f') {
+  //   let fs = fullscreen();
+  //   fullscreen(!fs);
+  // }
   if (key === 'r') {
     // randomise amplitudes
     for(let r = 0; r < oscCount;r++){
@@ -172,19 +176,19 @@ function wander(){
 }
 
 //toggle fullscreen mode
-function fullscreenMode(){
-  if(fullscreenToggle === 0){
-        let fs = fullscreen();
-        fullscreen(true);
-        fullscreenToggle = 1;
-        fullscreenButton.html('exit');
-      }
-    else {
-        fullscreenToggle = 0;
-        fullscreen(false);
-        fullscreenButton.html('fullscreen');
-      }
-}
+// function fullscreenMode(){
+//   if(fullscreenToggle === 0){
+//         let fs = fullscreen();
+//         fullscreen(true);
+//         fullscreenToggle = 1;
+//         fullscreenButton.html('exit');
+//       }
+//     else {
+//         fullscreenToggle = 0;
+//         fullscreen(false);
+//         fullscreenButton.html('fullscreen');
+//       }
+// }
 
 function dumpout(){ // write out to a csv
   let table = new p5.Table();
