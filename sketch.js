@@ -79,7 +79,7 @@ function setup() {
   wanderButton.mousePressed(wander);
 
   saveCSVbutton = createButton("save CSV");
-  saveCSVbutton.position(width - width * 0.1, height - 80);
+  saveCSVbutton.position(width - 70, height - 80);
   saveCSVbutton.mousePressed(dumpout);
 }
 
